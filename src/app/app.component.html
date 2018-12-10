@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</mat-toolbar>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <mat-card>
+    <app-configuration></app-configuration>
+  </mat-card>
+  <mat-card>
+    <app-values></app-values>
+  </mat-card>
+</div>
+
+<router-outlet></router-outlet>
