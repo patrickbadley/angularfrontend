@@ -11,9 +11,6 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY package.json /usr/src/app/package.json
 
-RUN npm config set proxy http://SFAM%5Cqxw5038:Dfsdf234@proxyamericas.bmwgroup.net:8080
-RUN npm config set https-proxy http://SFAM%5Cqxw5038:Dfsdf234@proxyamericas.bmwgroup.net:8080
-
 RUN npm install
 RUN npm install -g @angular/cli@7.0.4
 
