@@ -14,13 +14,16 @@ spec:
       labels:
         app: {{ .Values.angular.appName }}
     spec:
+{{ if .Values.image.private }}
+      imagePullSecrets:
+        - name: {{ .Chart.Name }}-acr-secret
+{{ end }}
       containers:
         - name: {{ .Values.angular.appName }}
-          image: {{ .Values.angular.image }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: {{ .Values.angular.port | default 80 }}
           env:
           - name: APP_ENVIRONMENT
             value: {{ .Values.environment }}
-      imagePullSecrets:
-      - name: azure-reg-creds
