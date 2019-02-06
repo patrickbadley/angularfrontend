@@ -12,7 +12,7 @@ export class ValuesComponent implements OnInit {
 
   values: any[];
   displayedColumns: string[] = ['value'];
-  
+
   constructor(private service: ValuesService) { }
 
   ngOnInit() {
@@ -24,11 +24,11 @@ export class ValuesComponent implements OnInit {
           this.service.getValues()
         ),
         catchError((err, caught) => {
-          console.log(err)
+          console.log(err);
           return empty();
         })
       ).subscribe(x => {
         this.values = x;
-      })
+      });
   }
 }

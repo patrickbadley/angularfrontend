@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from 'ng-config-service'
+import { ConfigService } from 'ng-config-service';
 import { catchError } from 'rxjs/operators';
 import { empty } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class ValuesService {
     return this.http.get<any[]>(this.configService.get('apiUrl') + this.valuesUrl)
       .pipe(
         catchError((err, caught) => {
-          console.log(err)
+          console.log(err);
           return empty();
         })
       );
