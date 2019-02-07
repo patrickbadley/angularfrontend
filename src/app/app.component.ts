@@ -8,7 +8,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'the HMB Realty Portal';
+  title = 'the HMB Dev Ops Portal';
   // userInfo: any;
   // isLoggedIn: boolean;
   // constructor(public oidcSecurityService: OidcSecurityService) {
