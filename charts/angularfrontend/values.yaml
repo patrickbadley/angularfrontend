@@ -5,8 +5,9 @@ angular:
   port: 4200
   type: ClusterIP
   configMapName: angular-config-json
-  features:
-    mapEnabled: false
+
+features:
+  mapEnabled: false
 
 image:
   repository: hmbdevopsteam.azurecr.io/angularfrontend
