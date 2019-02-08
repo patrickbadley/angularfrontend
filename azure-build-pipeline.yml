@@ -8,6 +8,14 @@ variables:
   # define 4 more variables: projectName, registryName, registryLogin and registryPassword in the build pipeline in UI
 
 steps:
+- powershell:  |
+        $editedFiles = git diff HEAD HEAD~ --name-only
+        $editedFiles | ForEach-Object {
+          Switch -Wildcard ($_ ) {
+            'charts/*' { Write-Output "##vso[task.setvariable variable=ChartChanged]True" }
+          }
+        }
+
 - bash: docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword)
   displayName: 'docker login'
 
@@ -19,14 +27,6 @@ steps:
     docker push $(registryServerName)/$(imageName):latest
   displayName: 'docker push'
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-
-- powershell:  |
-        $editedFiles = git diff HEAD HEAD~ --name-only
-        $editedFiles | ForEach-Object {
-          Switch -Wildcard ($_ ) {
-            'charts/*' { Write-Output "##vso[task.setvariable variable=ChartChanged]True" }
-          }
-        }
 
 - task: HelmInstaller@0
   displayName: 'Install Helm 2.12.3'
