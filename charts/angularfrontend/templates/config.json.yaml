@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.angular.configMapName }}
 data:
-  config.json: {{ printf "{\"apiUrl\": \"/api/\", \"mapEnabled\": %d }" .Values.features.mapEnabled }}
+  config.json: {{ printf "{\"apiUrl\": \"/api/\", \"mapEnabled\": %s }" .Values.features.mapEnabled ? "true" : "false" }}
