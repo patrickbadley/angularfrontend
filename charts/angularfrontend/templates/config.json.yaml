@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.angular.configMapName }}
 data:
   config.json: |
-    "{"
-      "\\\"apiUrl\\\": \\\"/api/\\\","
-      {{ printf "\\\"mapEnabled\\\": %s }\"" (.Values.features.mapEnabled | quote) }}
-    "}"
+    {
+      "apiUrl": "/api/",
+      "mapEnabled": {{ .Values.features.mapEnabled }}
+    }
