@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from 'ng-config-service';
 import { catchError } from 'rxjs/operators';
 import { empty, Observable } from 'rxjs';
+import { ILatLong } from 'angular-maps';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PropertyService {
   constructor(private http: HttpClient, private configService: ConfigService) { }
 
   propertyUrl = 'property';
+  propertyMapUrl = 'property/formap';
 
   getList(skip, top, sortProperty, sortDirection) {
 
@@ -33,10 +35,26 @@ export class PropertyService {
         })
       );
   }
+
+  getListForMap(latitude, longitude, radius) {
+
+    return this.http.post<Property.Response>(this.configService.get('apiUrl') + this.propertyMapUrl,
+      {
+        latitude: latitude,
+        longitude: longitude,
+        radius: radius
+      })
+      .pipe(
+        catchError((err, caught) => {
+          console.log(err);
+          return empty();
+        })
+      );
+  }
 }
 
 export module Property {
-  export interface ListItem {
+  export interface ListItem extends ILatLong {
     propertyId: number;
     ownerName: string;
     realtorName: string;
@@ -45,9 +63,16 @@ export module Property {
     state: string;
     zipCode: boolean;
     numVisits: number;
+    latitude: number;
+    longitude: number;
   }
   export interface PagedResponse {
     data: ListItem[];
     total: number;
   }
+
+  export interface Response {
+    data: ListItem[];
+  }
+
 }

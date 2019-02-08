@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "angular-auth-oidc-client": "^8.0.2",
+    "angular-maps": "^6.0.1",
+    "bingmaps": "^2.0.3",
     "core-js": "^2.5.4",
     "ng-config-service": "^0.1.8",
     "rxjs": "~6.3.3",

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ConfigService } from 'ng-config-service';
 // import { OidcSecurityService } from 'angular-auth-oidc-client';
 // import { filter, take, tap } from 'rxjs/operators';
 
@@ -9,16 +10,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'the HMB Dev Ops Portal';
-  // userInfo: any;
-  // isLoggedIn: boolean;
-  // constructor(public oidcSecurityService: OidcSecurityService) {
-  //   this.oidcSecurityService.getIsModuleSetup().pipe(
-  //     filter((isModuleSetup: boolean) => isModuleSetup),
-  //     take(1)
-  //   ).subscribe((isModuleSetup: boolean) => {
-  //     this.doCallbackLogicIfRequired();
-  //   });
-  // }
+  mapEnabled = false;
+
+  constructor(private configService: ConfigService) {
+    this.mapEnabled = configService.get('mapEnabled');
+  }
 
   ngOnInit() {
   //   return this.oidcSecurityService.getIsAuthorized().subscribe(

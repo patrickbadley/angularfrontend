@@ -1,0 +1,13 @@
+<div style="height: 500px;">
+    <x-map #xmap [Options]="_options" [Box]="_box">
+      <x-cluster-layer [GridSize]="150" [ClusteringEnabled]="true" [UseDynamicSizeMarkers]="true" [DynamicMarkerBaseSize]="18" [DynamicMarkerRanges]="_ranges" >
+        <x-map-marker *ngFor="let m of _markers; let i=index" [Latitude]="m.latitude" [Longitude]="m.longitude" [Title]="m.numVisits">
+            <x-info-box [DisableAutoPan]="true"
+                        [Title]="m.address"
+                        [Description]="m.city + ', ' + m.state + ' ' + m.zipCode + '<br/>Realtor: ' + m.realtorName + '<br/>Owner: &nbsp;' + m.ownerName + '<br/>Visits: &nbsp;&nbsp;' + m.numVisits ">
+                <x-info-box-action [Label]="'View More Details'" (ActionClicked)="_click(i)"></x-info-box-action>
+            </x-info-box>
+        </x-map-marker>
+      </x-cluster-layer>
+    </x-map>
+</div>

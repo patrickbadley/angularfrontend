@@ -1,3 +1,4 @@
 {
-  "apiUrl": "/api/"
+  "apiUrl": "https://localhost:44386/api/",
+  "mapEnabled": true
 }
