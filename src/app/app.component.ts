@@ -8,45 +8,6 @@ import { ConfigService } from 'ng-config-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   title = 'the HMB Dev Ops Portal';
-  mapEnabled = false;
-
-  constructor(private configService: ConfigService) {
-    this.mapEnabled = configService.get('mapEnabled');
-  }
-
-  ngOnInit() {
-  //   return this.oidcSecurityService.getIsAuthorized().subscribe(
-  //     (isAuthorized: boolean) => {
-  //       this.isLoggedIn = isAuthorized;
-
-  //       this.oidcSecurityService.getUserData().subscribe(info =>
-  //         {
-  //           this.userInfo = info;
-  //         });
-  //     })
-  //   ;
-  }
-
-  ngOnDestroy(): void { }
-
-  // login() {
-
-  //   // if you need to add extra parameters to the login
-  //   // let culture = 'de-CH';
-  //   // this.oidcSecurityService.setCustomRequestParameters({ 'ui_locales': culture });
-
-  //   this.oidcSecurityService.authorize();
-  // }
-
-  // logout() {
-  //   this.oidcSecurityService.logoff();
-  // }
-
-  // private doCallbackLogicIfRequired() {
-  //   if (window.location.hash) {
-  //     this.oidcSecurityService.authorizedCallback();
-  //   }
-  // }
 }

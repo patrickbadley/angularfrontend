@@ -1,0 +1,51 @@
+<div class="mat-elevation-z8" *ngIf="item">
+  <button mat-button [routerLink]="['/']">&lt; Back to List</button>
+  <mat-card fxLayout="row" fxLayout.xs="column">
+    <div flex fxFlex="50">
+      <h1>Property Details</h1>
+      <div>
+        <mat-form-field>
+          <mat-label>Owner</mat-label>
+          <input matInput readonly value="{{ item.ownerName }}" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Realtor</mat-label>
+          <input matInput readonly value="{{ item.realtorName }}" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput readonly value="{{ item.address }}" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>City/State/Zip</mat-label>
+          <input
+            matInput
+            readonly
+            value="{{ item.city + ', ' + item.state + ' ' + item.zipCode }}"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxFlex="50">
+      <h3>Visits</h3>
+      <mat-table #table [dataSource]="item.visits" class="example-table">
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef>
+            Date
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.date | date: 'M/d/yy h:mm a' }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card>
+</div>

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import {MarkerTypeId, IMapOptions, IBox} from 'angular-maps';
+import { MarkerTypeId, IMapOptions, IBox } from 'angular-maps';
 import { PropertyService, Property } from '../property.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-map',
@@ -8,7 +9,6 @@ import { PropertyService, Property } from '../property.service';
   styleUrls: ['./property-map.component.sass']
 })
 export class PropertyMapComponent implements AfterViewInit {
-
   mapEnabled = false;
   _markerTypeId = MarkerTypeId;
   _options: IMapOptions = {
@@ -29,18 +29,20 @@ export class PropertyMapComponent implements AfterViewInit {
   _ranges: Map<number, string> = new Map<number, string>([
     [25, 'rgba(20, 180, 20, 0.5)'],
     [50, 'rgba(255, 210, 40, 0.5)'],
-    [Number.MAX_SAFE_INTEGER , 'rgba(255, 40, 40, 0.5)']
+    [Number.MAX_SAFE_INTEGER, 'rgba(255, 40, 40, 0.5)']
   ]);
 
   _markers: Array<Property.ListItem> = new Array<Property.ListItem>();
 
-  constructor (private service: PropertyService) { }
+  constructor(private service: PropertyService, private router: Router) {}
 
   ngAfterViewInit() {
-
-    this.service.getListForMap((this._box.minLatitude + this._box.maxLatitude) / 2,
-                              (this._box.minLongitude + this._box.maxLongitude) / 2,
-                              (this._box.maxLongitude - this._box.minLongitude) / 2)
+    this.service
+      .getListForMap(
+        (this._box.minLatitude + this._box.maxLatitude) / 2,
+        (this._box.minLongitude + this._box.maxLongitude) / 2,
+        (this._box.maxLongitude - this._box.minLongitude) / 2
+      )
       .subscribe(propertyResponse => {
         for (const property of propertyResponse.data) {
           this._markers.push(property);
@@ -48,6 +50,6 @@ export class PropertyMapComponent implements AfterViewInit {
       });
   }
   _click(index: number) {
-     console.log(`Marker ${index} says: hello world...`);
+    this.router.navigate(['/property-details', index]);
   }
 }

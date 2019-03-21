@@ -1,39 +1,69 @@
 <div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" class="example-table"
-             matSort matSortActive="address" matSortDisableClear matSortDirection="asc">
+  <mat-table
+    #table
+    [dataSource]="dataSource"
+    class="example-table"
+    matSort
+    matSortActive="address"
+    matSortDisableClear
+    matSortDirection="asc"
+  >
     <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Address
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.address }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        City
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.city }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="state">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        State
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.state }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="zipCode">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Zip </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.zipCode.split('-')[0]}} </mat-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.zipCode.split('-')[0] }}
+      </mat-cell>
     </ng-container>
     <ng-container matColumnDef="realtorName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Realtor </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.realtorName}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Realtor
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.realtorName }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="ownerName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Owner </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.ownerName}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Owner
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.ownerName }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="numVisits">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> # of Visits </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.numVisits}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        # of Visits
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.numVisits }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="details">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button
+          mat-button
+          [routerLink]="['/property-details', element.propertyId]"
+        >
+          Details
+        </button></mat-cell
+      >
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
-  <mat-paginator [length]="resultsLength" [pageSize]="10">
-  </mat-paginator>
-
-  </div>
+  <mat-paginator [length]="resultsLength" [pageSize]="10"> </mat-paginator>
+</div>

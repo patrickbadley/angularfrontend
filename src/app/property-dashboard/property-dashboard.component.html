@@ -1,0 +1,12 @@
+<mat-card>
+  <app-property-list *ngIf="!mapEnabled"></app-property-list>
+
+  <mat-tab-group *ngIf="mapEnabled">
+    <mat-tab label="Property Map">
+      <app-property-map></app-property-map>
+    </mat-tab>
+    <mat-tab label="Property List">
+      <app-property-list></app-property-list>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

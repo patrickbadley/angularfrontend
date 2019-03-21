@@ -9,25 +9,39 @@ import { ILatLong } from 'angular-maps';
   providedIn: 'root'
 })
 export class PropertyService {
-
-  constructor(private http: HttpClient, private configService: ConfigService) { }
+  constructor(private http: HttpClient, private configService: ConfigService) {}
 
   propertyUrl = 'property';
   propertyMapUrl = 'property/formap';
 
-  getList(skip, top, sortProperty, sortDirection) {
+  getDetails(id) {
+    return this.http
+      .get<Property.Item>(
+        this.configService.get('apiUrl') + this.propertyUrl + '/' + id
+      )
+      .pipe(
+        catchError((err, caught) => {
+          console.log(err);
+          return empty();
+        })
+      );
+  }
 
-    return this.http.post<Property.PagedResponse>(this.configService.get('apiUrl') + this.propertyUrl,
-      {
-        skip: skip,
-        top: top,
-        sortParameters: [
-          {
-            propertyName: sortProperty,
-            sortDirection: sortDirection === 'asc' ? 0 : 1
-          }
-        ]
-      })
+  getList(skip, top, sortProperty, sortDirection) {
+    return this.http
+      .post<Property.PagedResponse>(
+        this.configService.get('apiUrl') + this.propertyUrl,
+        {
+          skip: skip,
+          top: top,
+          sortParameters: [
+            {
+              propertyName: sortProperty,
+              sortDirection: sortDirection === 'asc' ? 0 : 1
+            }
+          ]
+        }
+      )
       .pipe(
         catchError((err, caught) => {
           console.log(err);
@@ -37,13 +51,15 @@ export class PropertyService {
   }
 
   getListForMap(latitude, longitude, radius) {
-
-    return this.http.post<Property.Response>(this.configService.get('apiUrl') + this.propertyMapUrl,
-      {
-        latitude: latitude,
-        longitude: longitude,
-        radius: radius
-      })
+    return this.http
+      .post<Property.Response>(
+        this.configService.get('apiUrl') + this.propertyMapUrl,
+        {
+          latitude: latitude,
+          longitude: longitude,
+          radius: radius
+        }
+      )
       .pipe(
         catchError((err, caught) => {
           console.log(err);
@@ -75,4 +91,19 @@ export module Property {
     data: ListItem[];
   }
 
+  export interface Item {
+    propertyId: number;
+    ownerName: string;
+    realtorName: string;
+    address: string;
+    city: boolean;
+    state: string;
+    zipCode: boolean;
+    numVisits: number;
+    visits: VisitListItem[];
+  }
+
+  export interface VisitListItem {
+    date: Date;
+  }
 }
