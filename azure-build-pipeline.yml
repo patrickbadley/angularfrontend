@@ -8,5 +8,3 @@ steps:
     repository: 'angularfrontend'
     command: 'buildAndPush'
     Dockerfile: '$(system.defaultWorkingDirectory)/Dockerfile'
-    buildContext:  -t patrickbadley/angularfrontend:$(build.buildId) -t patrickbadley/angularfrontend:latest $(system.defaultWorkingDirectory)
-  displayName: 'docker build'
