@@ -5,6 +5,11 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'patrickbadley'
+    command: 'login'
+    
+- task: Docker@2
+  inputs:
+    containerRegistry: 'patrickbadley'
     repository: 'angularfrontend'
     command: 'buildAndPush'
     Dockerfile: '$(system.defaultWorkingDirectory)/Dockerfile'
