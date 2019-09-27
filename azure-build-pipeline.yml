@@ -10,6 +10,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'patrickbadley'
-    repository: 'angularfrontend'
+    repository: 'patrickbadley/angularfrontend'
     command: 'buildAndPush'
     Dockerfile: '$(system.defaultWorkingDirectory)/Dockerfile'
