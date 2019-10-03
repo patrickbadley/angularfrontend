@@ -9,5 +9,5 @@ import { ConfigService } from 'ng-config-service';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'the HMB Dev Ops Portal';
+  title = 'DevelOP Your K8s Demo';
 }
